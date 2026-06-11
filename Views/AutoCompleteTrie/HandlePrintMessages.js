@@ -26,7 +26,7 @@ const printFoundWordMessage = (word, isWordFound) => {
   else console.log(`✗ '${word}' exists in dictionary.`);
 };
 
-const printAutoCompleteSuggestins = (prefix, suggestions) => {
+const printAutoCompleteSuggestions = (prefix, suggestions) => {
   console.log(`Suggestions for '${prefix}':${suggestions.joim(", ")}`);
 };
 
@@ -34,6 +34,7 @@ export default {
   printWelcomeMessage,
   printCommands,
   printExitMessage,
+  printAddWordMessage,
   printFoundWordMessage,
-  printAutoCompleteSuggestins,
+  printAutoCompleteSuggestions,
 };
