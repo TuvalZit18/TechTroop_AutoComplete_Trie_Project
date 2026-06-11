@@ -10,10 +10,10 @@ class AutoCompleteTrie {
    */
   addWord(word) {
     if (typeof word !== "string") {
-      //# Invalid Input
+      // TODO decide return value for invalid string
     }
     if (word.length === 0) {
-      //# Empty String
+      // TODO decide return value for empty string
     }
     const letters = word.toLowerCase().split("");
     let current = this;
@@ -29,3 +29,5 @@ class AutoCompleteTrie {
     current.endOfWord = true;
   }
 }
+
+export default AutoCompleteTrie;
