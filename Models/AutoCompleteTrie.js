@@ -55,6 +55,12 @@ class AutoCompleteTrie {
     return current.endOfWord;
   }
 
+  predictWords(prefix) {
+    const completions = [];
+    this._allWordsHelper(prefix, this, completions);
+    return completions;
+  }
+
   _getRemainingTree(prefix, node) {
     let current = node;
     const letters = prefix.toLowerCase().split("");
@@ -72,7 +78,7 @@ class AutoCompleteTrie {
     let remainingNode = this._getRemainingTree(prefix, node);
     if (!remainingNode) return;
 
-    if (remainingNode.endOfWord) allWords.push(prefix);
+    if (remainingNode.endOfWord) allWords.push(prefix.toLowerCase());
 
     const letters = Object.keys(remainingNode.children);
     if (letters.length === 0) return;
