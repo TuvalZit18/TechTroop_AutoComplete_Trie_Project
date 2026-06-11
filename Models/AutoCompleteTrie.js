@@ -4,6 +4,8 @@ class AutoCompleteTrie {
     this.children = {};
     this.endOfWord = false;
   }
+
+  //TODO extract validation to different file
   /**
    * Adding new word to the AutoCompleteTrie
    * @param {String} word  - words to add to trie.
@@ -27,6 +29,28 @@ class AutoCompleteTrie {
       }
     }
     current.endOfWord = true;
+  }
+
+  /**
+   * Finding word in AutoCompleteTrie
+   * @param {String} word  - words to add to trie.
+   * @returns {boolean} - true word was found, otherwise false.
+   */
+  findWord(word) {
+    if (typeof word !== "string") {
+      // TODO decide return value for invalid string
+    }
+    if (word.length === 0) {
+      // TODO decide return value for empty string
+    }
+
+    let current = this;
+    const letters = word.toLowerCase().split("");
+    for (const letter of letters) {
+      if (!current.children[letter]) return false;
+      current = current.children[letter];
+    }
+    return current.endOfWord;
   }
 }
 
