@@ -85,3 +85,74 @@ describe("Tests || Models || AutoCompleteTrie || findWord", () => {
     //INCOMPLETE
   });
 });
+
+describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
+  let autoCompleteTrie;
+
+  beforeEach(() => {
+    autoCompleteTrie = new AutoCompleteTrie();
+    autoCompleteTrie.addWord("cat");
+    autoCompleteTrie.addWord("car");
+    autoCompleteTrie.addWord("card");
+    autoCompleteTrie.addWord("care");
+    autoCompleteTrie.addWord("something");
+  });
+
+  test("Happy path —  prefix with multiple completions returns all matching words", () => {
+    const predictedWords = autoCompleteTrie.predictWords("ca");
+
+    expect(predictedWords.length).toBe(4);
+    expect(predictedWords).toEqual(["cat", "car", "card", "care"]);
+  });
+  test("Private methods - insure _remainingTree and _allWordsHelper methods were invoked when calling predictWord methods.", () => {
+    const _remainingTreeSpy = jest.spyOn(autoCompleteTrie, "_getRemainingTree");
+    const _allWordsHelperSpy = jest.spyOn(autoCompleteTrie, "_allWordsHelper");
+
+    const predictedWords = autoCompleteTrie.predictWords("ca");
+
+    expect(_remainingTreeSpy).toHaveBeenCalled();
+    expect(_allWordsHelperSpy).toHaveBeenCalled();
+
+    _remainingTreeSpy.mockRestore();
+    _allWordsHelperSpy.mockRestore();
+  });
+
+  test("No matches — prefix that doesn't exist in trie returns empty array.", () => {
+    const predictedWords = autoCompleteTrie.predictWords("dog");
+
+    expect(predictedWords.length).toBe(0);
+    expect(predictedWords).toEqual([]);
+  });
+
+  test("Exact word as prefix — prefix that is itself a complete word is included in results.", () => {
+    const predictedWords = autoCompleteTrie.predictWords("car");
+
+    expect(predictedWords.length).toBe(3);
+    expect(predictedWords).toEqual(["car", "card", "care"]);
+  });
+
+  test("Single completion — prefix with only one matching word returns array with that word.", () => {
+    const predictedWords = autoCompleteTrie.predictWords("some");
+
+    expect(predictedWords.length).toBe(1);
+    expect(predictedWords).toEqual(["something"]);
+  });
+
+  test("Case insensitive — uppercase prefix still finds matches", () => {
+    const predictedWords = autoCompleteTrie.predictWords("Ca");
+    const predictedWords2 = autoCompleteTrie.predictWords("cA");
+    const predictedWords3 = autoCompleteTrie.predictWords("CA");
+
+    expect(predictedWords.length).toBe(4);
+    expect(predictedWords).toEqual(["cat", "car", "card", "care"]);
+
+    expect(predictedWords2.length).toBe(4);
+    expect(predictedWords2).toEqual(predictedWords);
+
+    expect(predictedWords3.length).toBe(4);
+    expect(predictedWords2).toEqual(predictedWords);
+  });
+  test("Empty prefix — should ...", () => {
+    //INCOMPLETE
+  });
+});
