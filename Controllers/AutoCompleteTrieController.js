@@ -16,7 +16,7 @@ do {
   switch (command) {
     case "add":
       if (autoCompleteTrie.findWord(word))
-        HandlePrintMessages.printFoundWordMessage(word, false);
+        HandlePrintMessages.printFoundWordMessage(word, true);
       else {
         autoCompleteTrie.addWord(word);
         HandlePrintMessages.printAddWordMessage(word);
