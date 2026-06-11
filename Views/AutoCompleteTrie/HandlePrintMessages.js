@@ -13,7 +13,7 @@ exit           - Quit program\n`);
 };
 
 const printExitMessage = () => {
-  console.log("Goodbye!\n");
+  console.log("Goodbye!");
 };
 
 const printAddWordMessage = (word) => {
