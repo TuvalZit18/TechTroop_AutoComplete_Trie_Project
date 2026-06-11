@@ -4,20 +4,11 @@ class AutoCompleteTrie {
     this.children = {};
     this.endOfWord = false;
   }
-
-  //TODO extract validation to different file
   /**
    * Adding new word to the AutoCompleteTrie
    * @param {String} word  - words to add to trie.
    */
   addWord(word) {
-    if (typeof word !== "string") {
-      // TODO decide return value for invalid string
-    }
-    if (word.length === 0) {
-      // TODO decide return value for empty string
-    }
-
     const letters = word.toLowerCase().split("");
     let current = this;
 
@@ -38,13 +29,6 @@ class AutoCompleteTrie {
    * @returns {boolean} - true word was found, otherwise false.
    */
   findWord(word) {
-    if (typeof word !== "string") {
-      // TODO decide return value for invalid string
-    }
-    if (word.length === 0) {
-      // TODO decide return value for empty string
-    }
-
     let current = this;
     const letters = word.toLowerCase().split("");
 
