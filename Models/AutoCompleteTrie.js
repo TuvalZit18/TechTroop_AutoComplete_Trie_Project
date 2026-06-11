@@ -17,6 +17,7 @@ class AutoCompleteTrie {
     if (word.length === 0) {
       // TODO decide return value for empty string
     }
+
     const letters = word.toLowerCase().split("");
     let current = this;
 
@@ -46,11 +47,39 @@ class AutoCompleteTrie {
 
     let current = this;
     const letters = word.toLowerCase().split("");
+
     for (const letter of letters) {
       if (!current.children[letter]) return false;
       current = current.children[letter];
     }
     return current.endOfWord;
+  }
+
+  _getRemainingTree(prefix, node) {
+    let current = node;
+    const letters = prefix.toLowerCase().split("");
+
+    for (const letter of letters) {
+      if (!current.children[letter]) return null;
+      current = current.children[letter];
+    }
+    return current;
+  }
+
+  _allWordsHelper(prefix, node, allWords) {
+    if (!node) return;
+
+    let remainingNode = this._getRemainingTree(prefix, node);
+    if (!remainingNode) return;
+
+    if (remainingNode.endOfWord) allWords.push(prefix);
+
+    const letters = Object.keys(remainingNode.children);
+    if (letters.length === 0) return;
+
+    for (const letter of letters) {
+      this._allWordsHelper(prefix + letter, node, allWords);
+    }
   }
 }
 
