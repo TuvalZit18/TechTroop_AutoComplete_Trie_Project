@@ -1,0 +1,28 @@
+{
+  "name": "techtroop_autocomplete_trie_project",
+  "version": "1.0.0",
+  "description": "A console-based autocomplete application built using a **Trie (Prefix Tree)** data structure. The project allows users to add words, search for words, and get autocomplete suggestions based on a prefix.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuvalZit18/TechTroop_AutoComplete_Trie_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TuvalZit18/TechTroop_AutoComplete_Trie_Project/issues"
+  },
+  "homepage": "https://github.com/TuvalZit18/TechTroop_AutoComplete_Trie_Project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.4.1",
+    "jest": "^30.4.2"
+  }
+}
