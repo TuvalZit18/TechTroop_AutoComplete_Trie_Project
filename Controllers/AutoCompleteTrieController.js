@@ -38,11 +38,14 @@ do {
       );
       break;
     case "complete":
-      if (word.length > 0)
+      if (word && word.length > 0)
         HandlePrintMessages.printAutoCompleteSuggestions(
           word,
           autoCompleteTrie.predictWords(word),
         );
+      else {
+        HandlePrintMessages.printAutoCompleteSuggestions("", []);
+      }
       break;
     case "help":
       HandlePrintMessages.printCommands();
@@ -53,6 +56,9 @@ do {
           word,
           autoCompleteTrie.useWord(word).frequency,
         );
+      else {
+        HandlePrintMessages.printFoundWordMessage(word, false);
+      }
       break;
     case "exit":
       HandlePrintMessages.printExitMessage();
