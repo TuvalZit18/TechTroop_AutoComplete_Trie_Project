@@ -9,7 +9,16 @@ const autoCompleteTrie = new AutoCompleteTrie();
 HandlePrintMessages.printWelcomeMessage();
 do {
   input = prompt("> ");
-  let [arg1, arg2] = input.split(" ").map((item) => item.trim());
+  const spaceIndex = input.indexOf(" ");
+  const arg1 =
+    spaceIndex === -1 ? input.trim() : input.slice(0, spaceIndex).trim();
+  const arg2 =
+    spaceIndex === -1
+      ? undefined
+      : input
+          .slice(spaceIndex + 1)
+          .trim()
+          .replace(/^"|"$/g, "");
   command = arg1;
   word = arg2;
 
@@ -29,16 +38,27 @@ do {
       );
       break;
     case "complete":
-      HandlePrintMessages.printAutoCompleteSuggestions(
-        word,
-        autoCompleteTrie.predictWords(word),
-      );
+      if (word.length > 0)
+        HandlePrintMessages.printAutoCompleteSuggestions(
+          word,
+          autoCompleteTrie.predictWords(word),
+        );
       break;
     case "help":
       HandlePrintMessages.printCommands();
       break;
+    case "use":
+      if (autoCompleteTrie.findWord(word))
+        HandlePrintMessages.printUseWord(
+          word,
+          autoCompleteTrie.useWord(word).frequency,
+        );
+      break;
     case "exit":
       HandlePrintMessages.printExitMessage();
+      break;
+    default:
+      HandlePrintMessages.printWrongCommand(command);
       break;
   }
 } while (command !== "exit");
