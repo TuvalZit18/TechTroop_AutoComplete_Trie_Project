@@ -9,6 +9,7 @@ add <word>      - Add word to dictionary
 find <word>     - Check if word exists
 complete <prefix> - Get completions
 help           - Show this message
+use            - Increase word usage frequency by 1
 exit           - Quit program\n`);
 };
 
