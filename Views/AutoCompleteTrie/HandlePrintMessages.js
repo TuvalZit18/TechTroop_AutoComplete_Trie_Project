@@ -40,6 +40,12 @@ const printUseWord = (word, frequency) => {
   console.log(`✓ Incremented usage for '${word}' (now ${frequency})\n`);
 };
 
+const printWrongCommand = (command) => {
+  console.error(
+    `'${command}' is not recognized as an internal or external command.\n`,
+  );
+};
+
 export default {
   printWelcomeMessage,
   printCommands,
@@ -48,4 +54,5 @@ export default {
   printFoundWordMessage,
   printAutoCompleteSuggestions,
   printUseWord,
+  printWrongCommand,
 };
