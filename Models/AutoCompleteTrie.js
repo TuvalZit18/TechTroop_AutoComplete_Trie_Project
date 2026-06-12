@@ -3,6 +3,7 @@ class AutoCompleteTrie {
     this.value = val;
     this.children = {};
     this.endOfWord = false;
+    this.frequency = 0;
   }
   /**
    * Adding new word to the AutoCompleteTrie
