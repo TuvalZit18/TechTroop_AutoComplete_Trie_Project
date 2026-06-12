@@ -72,6 +72,10 @@ class AutoCompleteTrie {
       this._allWordsHelper(prefix + letter, node, allWords);
     }
   }
+  useWord(word) {
+    let lastLetterNode = _getRemainingTree(word, this);
+    lastLetterNode.frequency++;
+  }
 }
 
 export default AutoCompleteTrie;
