@@ -17,7 +17,7 @@ const printExitMessage = () => {
 };
 
 const printAddWordMessage = (word) => {
-  console.log(`✓ Added ${word} to dictionary.\n`);
+  console.log(`✓ Added '${word}' to dictionary.\n`);
 };
 
 const printFoundWordMessage = (word, isWordFound) => {
