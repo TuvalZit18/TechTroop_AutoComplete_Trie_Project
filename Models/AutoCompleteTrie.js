@@ -43,7 +43,9 @@ class AutoCompleteTrie {
   predictWords(prefix) {
     const completions = [];
     this._allWordsHelper(prefix, this, completions);
-    return completions;
+    return completions.sort(
+      (node1, node2) => node2.frequency - node1.frequency,
+    );
   }
 
   _getRemainingTree(prefix, node) {
@@ -63,7 +65,11 @@ class AutoCompleteTrie {
     let remainingNode = this._getRemainingTree(prefix, node);
     if (!remainingNode) return;
 
-    if (remainingNode.endOfWord) allWords.push(prefix.toLowerCase());
+    if (remainingNode.endOfWord)
+      allWords.push({
+        word: prefix.toLowerCase(),
+        frequency: remainingNode.frequency,
+      });
 
     const letters = Object.keys(remainingNode.children);
     if (letters.length === 0) return;
@@ -73,7 +79,7 @@ class AutoCompleteTrie {
     }
   }
   useWord(word) {
-    let lastLetterNode = _getRemainingTree(word, this);
+    let lastLetterNode = this._getRemainingTree(word, this);
     lastLetterNode.frequency++;
   }
 }
