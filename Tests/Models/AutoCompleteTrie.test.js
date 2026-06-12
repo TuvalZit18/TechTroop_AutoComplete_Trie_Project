@@ -38,13 +38,6 @@ describe("Tests || Models || AutoCompleteTrie || addWord", () => {
       autoCompleteTrie.children["c"].children["a"].children,
     ).toHaveProperty("r");
   });
-
-  test("Invalid input — passing a non-string should ...", () => {
-    //INCOMPLETE
-  });
-  test("Empty string — passing a empty string should ...", () => {
-    //INCOMPLETE
-  });
 });
 
 describe("Tests || Models || AutoCompleteTrie || findWord", () => {
@@ -77,13 +70,6 @@ describe("Tests || Models || AutoCompleteTrie || findWord", () => {
     let isWordInTrie = autoCompleteTrie.findWord("Hello");
     expect(isWordInTrie).toBe(true);
   });
-
-  test("Invalid input — passing a non-string should ...", () => {
-    //INCOMPLETE
-  });
-  test("Empty string — passing a empty string should ...", () => {
-    //INCOMPLETE
-  });
 });
 
 describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
@@ -102,7 +88,12 @@ describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
     const predictedWords = autoCompleteTrie.predictWords("ca");
 
     expect(predictedWords.length).toBe(4);
-    expect(predictedWords).toEqual(["cat", "car", "card", "care"]);
+    expect(predictedWords).toEqual([
+      { frequency: 0, word: "cat" },
+      { frequency: 0, word: "car" },
+      { frequency: 0, word: "card" },
+      { frequency: 0, word: "care" },
+    ]);
   });
   test("Private methods - insure _remainingTree and _allWordsHelper methods were invoked when calling predictWord methods.", () => {
     const _remainingTreeSpy = jest.spyOn(autoCompleteTrie, "_getRemainingTree");
@@ -128,14 +119,18 @@ describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
     const predictedWords = autoCompleteTrie.predictWords("car");
 
     expect(predictedWords.length).toBe(3);
-    expect(predictedWords).toEqual(["car", "card", "care"]);
+    expect(predictedWords).toEqual([
+      { frequency: 0, word: "car" },
+      { frequency: 0, word: "card" },
+      { frequency: 0, word: "care" },
+    ]);
   });
 
   test("Single completion — prefix with only one matching word returns array with that word.", () => {
     const predictedWords = autoCompleteTrie.predictWords("some");
 
     expect(predictedWords.length).toBe(1);
-    expect(predictedWords).toEqual(["something"]);
+    expect(predictedWords).toEqual([{ frequency: 0, word: "something" }]);
   });
 
   test("Case insensitive — uppercase prefix still finds matches", () => {
@@ -144,7 +139,12 @@ describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
     const predictedWords3 = autoCompleteTrie.predictWords("CA");
 
     expect(predictedWords.length).toBe(4);
-    expect(predictedWords).toEqual(["cat", "car", "card", "care"]);
+    expect(predictedWords).toEqual([
+      { frequency: 0, word: "cat" },
+      { frequency: 0, word: "car" },
+      { frequency: 0, word: "card" },
+      { frequency: 0, word: "care" },
+    ]);
 
     expect(predictedWords2.length).toBe(4);
     expect(predictedWords2).toEqual(predictedWords);
@@ -152,7 +152,23 @@ describe("Tests || Models || AutoCompleteTrie || predictWords", () => {
     expect(predictedWords3.length).toBe(4);
     expect(predictedWords2).toEqual(predictedWords);
   });
-  test("Empty prefix — should ...", () => {
-    //INCOMPLETE
+
+  test("Sort by frequenceis — Descending order of prediction words ", () => {
+    autoCompleteTrie.useWord("card");
+    autoCompleteTrie.useWord("card");
+    autoCompleteTrie.useWord("card");
+    autoCompleteTrie.useWord("care");
+    autoCompleteTrie.useWord("care");
+    autoCompleteTrie.useWord("car");
+
+    const predictedWords = autoCompleteTrie.predictWords("Ca");
+
+    expect(predictedWords.length).toBe(4);
+    expect(predictedWords).toEqual([
+      { frequency: 3, word: "card" },
+      { frequency: 2, word: "care" },
+      { frequency: 1, word: "car" },
+      { frequency: 0, word: "cat" },
+    ]);
   });
 });
