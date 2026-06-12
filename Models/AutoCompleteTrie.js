@@ -81,6 +81,7 @@ class AutoCompleteTrie {
   useWord(word) {
     let lastLetterNode = this._getRemainingTree(word, this);
     lastLetterNode.frequency++;
+    return lastLetterNode;
   }
 }
 
