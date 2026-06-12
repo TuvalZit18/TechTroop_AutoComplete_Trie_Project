@@ -26,7 +26,18 @@ const printFoundWordMessage = (word, isWordFound) => {
 };
 
 const printAutoCompleteSuggestions = (prefix, suggestions) => {
-  console.log(`Suggestions for '${prefix}': ${suggestions.join(", ")}\n`);
+  let suggestionsDisplay = "";
+  for (const suggestion of suggestions) {
+    suggestionsDisplay += `${suggestion.word} (${suggestion.frequency}), `;
+  }
+
+  console.log(
+    `Suggestions for '${prefix}': ${suggestionsDisplay.slice(0, -2)}\n`,
+  );
+};
+
+const printUseWord = (word, frequency) => {
+  console.log(`✓ Incremented usage for '${word}' (now ${frequency})\n`);
 };
 
 export default {
@@ -36,4 +47,5 @@ export default {
   printAddWordMessage,
   printFoundWordMessage,
   printAutoCompleteSuggestions,
+  printUseWord,
 };
