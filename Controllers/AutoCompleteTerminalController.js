@@ -1,6 +1,6 @@
 import promptSync from "prompt-sync";
 
-import HandlePrintMessages from "../Views/AutoCompleteTrie/HandlePrintMessages.js";
+import HandlePrintMessages from "../Views/AutoCompleteTrie/HandleTerminalMessages.js";
 import AutoCompleteTrie from "../Models/AutoCompleteTrie.js";
 const prompt = promptSync();
 
