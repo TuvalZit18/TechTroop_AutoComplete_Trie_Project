@@ -55,6 +55,9 @@ const onClick_btnAdd = (
       const message = View.printAddWordMessage(word);
       setMessage(messageContainer, message, "success");
     }
+  } else {
+    const message = View.printAddWordMessage(word);
+    setMessage(messageContainer, message, "failure");
   }
 };
 
