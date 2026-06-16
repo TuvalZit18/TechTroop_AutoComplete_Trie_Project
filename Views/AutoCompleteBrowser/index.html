@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="../../Controllers/AutoCompleteBrowserController.js"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="main-header-text">AutoComplete Trie Web UI</h1>
+    </header>
+    <div class="main-container">
+      <div class="input-button-container">
+        <input
+          class="inputAdd"
+          placeholder="Enter a word to add to the dictionary"
+          type="text"
+        />
+        <button class="btnAdd">Add word</button>
+      </div>
+      <div class="message-container"></div>
+      <div class="autoComplete-container">
+        <input
+          id="autoCompleteInput"
+          type="text"
+          placeholder="Start typing to see suggestions..."
+        />
+        <div class="auto-complete">
+          <ul class="auto-complete-list">
+            <!-- <li><span class="highlight">Tuval </span>zitelbach</li>
+            <li>Alon Sinay</li>
+            <li>Itay Tamir</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li>
+            <li>zitelbach</li> -->
+          </ul>
+        </div>
+      </div>
+      <div class="footer-card">
+        <span class="counter-words-text"></span>
+        <span>Words in Dictionary</span>
+      </div>
+    </div>
+  </body>
+</html>
